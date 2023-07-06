@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: dim_status
+    description: Dimension table with order status.
+    columns:
+      - name: status_sk
+        description: Surrogate key for order status.
+        tests:
+          - unique
+          - not_null
+
+      - name: status_id
+        description: Order current status.
+        tests:
+          - unique
+          - not_null
+
+      - name: order_status
+        description: Order current status.
+        tests:
+        - not_null

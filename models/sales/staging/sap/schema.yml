@@ -1,0 +1,231 @@
+version: 2
+
+models:
+  - name: stg_addresses
+    description: Address data for customers, employees, and vendors.
+    columns:
+      - name: address_id
+        description: Primary key for address records.
+        tests:
+          - unique
+          - not_null
+      - name: state_province_id
+        description: Unique identification number for the state or province. Foreign key to stateprovinces table.
+        tests:
+          - not_null
+      - name: city_name
+        description: Name of the city.
+
+  - name: stg_country_regions
+    description: Lookup table containing ISO standard codes for countries and regions.
+    columns:
+      - name: country_region_code
+        description: Primary key for country and region records. ISO standard code for countries and regions.
+        tests:
+          - unique
+          - not_null
+      - name: country_region_name
+        description: Country or region name.
+
+  - name: stg_credit_cards
+    description: Customer credit card data.
+    columns:
+      - name: credit_card_id
+        description: Primary key for credit card records.
+        tests:
+          - unique
+          - not_null
+      - name: card_type
+        description: Credit card type.
+        tests:
+          - not_null
+
+  - name: stg_customers
+    description: Current customer data.
+    columns:
+      - name: customer_id
+        description: Primary key for customer records.
+        tests:
+          - unique
+          - not_null
+      - name: person_id
+        description: Foreign key to people table.
+        tests:
+          - unique
+      - name: store_id
+        description: Foreign key to stores table.
+
+  - name: stg_dates
+    description: Current order status.
+    columns:
+      - name: order_date
+        description: Purchase order creation date.
+        tests:
+        - not_null
+
+  - name: stg_people
+    description: Human beings involved with AdventureWorks, including employees, customer contacts, and vendor contacts.
+    columns:
+      - name: person_id
+        description: Primary key for person records.
+        tests:
+          - unique
+          - not_null
+      - name: person_type_id
+        description: Primary type of person. SC = Store Contact, IN = Individual (retail) Customer, SP = Sales Person, EM = Employee (non-sales), VC = Vendor Contact, GC = General Contact.
+        tests:
+          - not_null
+      - name: full_name
+        description: Full name of the person.
+
+  - name: stg_product_categories
+    description: High-level product categorization.
+    columns:
+      - name: product_category_id
+        description: Primary key for product category records.
+        tests:
+          - unique
+          - not_null
+      - name: product_category_name
+        description: Category description.
+        tests:
+          - not_null
+
+  - name: stg_product_subcategories
+    description: Product subcategories.
+    columns:
+      - name: product_subcategory_id
+        description: Primary key for product subcategory records.
+        tests:
+          - not_null
+      - name: product_category_id
+        description: Product category identification number. Foreign key to product_categories table.
+        tests:
+          - not_null
+      - name: product_subcategory_name
+        description: Subcategory description.
+        tests:
+          - not_null
+
+  - name: stg_products
+    description: Products sold or used in the manufacturing of sold products.
+    columns:
+      - name: product_id
+        description: Primary key for product records.
+        tests:
+          - unique
+          - not_null
+      - name: product_subcategory_id
+        description: Product is a member of this product subcategory. Foreign key to product subcategories table.
+      - name: product_name
+        description: Name of the product.
+        tests:
+          - not_null
+
+  - name: stg_sales_order_details
+    description: Individual products associated with a specific sales order.
+    columns:
+      - name: sales_order_detail_id
+        description: Primary key. One incremental unique number per product sold.
+        tests:
+          - unique
+          - not_null
+      - name: sales_order_id
+        description: Foreign key to sales order header table.
+        tests:
+          - not_null
+      - name: product_id
+        description: Product sold to customer. Foreign key to product table.
+        tests:
+          - not_null
+      - name: order_quantity
+        description: Quantity ordered per product.
+        tests:
+          - not_null
+      - name: unit_price
+        description: Selling price of a single product.
+        tests:
+          - not_null
+      - name: unit_price_discount
+        description: Discount amount.
+
+  - name: stg_sales_order_header_sales_reasons
+    description: Cross-reference table that maps sales orders to sales reason codes.
+    columns:
+      - name: sales_order_id
+        description: Primary key. Foreign key to sales order headers table.
+        tests:
+          - not_null
+      - name: sales_reason_id
+        description: Foreign key to sales reasons table.
+
+  - name: stg_sales_order_headers
+    description: General sales order data.
+    columns:
+      - name: sales_order_id
+        description: Primary key.
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: Customer identification number. Foreign key to customers table.
+      - name: credit_card_id
+        description: Credit card identification number. Foreign key to credit cards table.
+      - name: ship_to_address_id
+        description: Customer shipping address. Foreign key to addresses table.
+      - name: order_status
+        description: Current order status.
+      - name: order_date
+        description: Current order status.
+      - name: order_subtotal
+        description: Order subtotal.
+
+  - name: stg_sales_reasons
+    description: Lookup table of customer purchase reasons.
+    columns:
+      - name: sales_reason_id
+        description: Primary key for sales reason records.
+        tests:
+          - unique
+          - not_null
+      - name: sales_reason
+        description: Sales reason description.
+
+  - name: stg_state_provinces
+    description: Lookup table for states and provinces.
+    columns:
+      - name: state_province_id
+        description: Primary key for state and province records.
+        tests:
+          - unique
+          - not_null
+      - name: country_region_code
+        description: ISO standard country or region code. Foreign key to countryregions table.
+        tests:
+          - not_null
+      - name: state_province_name
+        description: State or province name.
+        tests:
+          - not_null
+
+  - name: stg_status
+    description: Current order status.
+    columns:
+      - name: status_id
+        description: Order current status. 1 = In process; 2 = Approved; 3 = Backordered; 4 = Rejected; 5 = Shipped; 6 = Cancelled.
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_stores
+    description: Customers (resellers) of Adventure Works products.
+    columns:
+      - name: store_id
+        description: Primary key. Foreign key to customer table.
+        tests:
+          - unique
+          - not_null
+      - name: store_name
+        description: Name of the store.
+        tests:
+          - not_null

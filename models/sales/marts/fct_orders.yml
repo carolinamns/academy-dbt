@@ -1,0 +1,104 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: Fact table with sales order data.
+    columns:
+      - name: sales_order_sk
+        description: Surrogate key for sales orders.
+        tests:
+          - unique
+          - not_null
+
+      - name: product_sk
+        description: Surrogate key for product records.
+        tests:
+          - relationships:
+              to: ref('dim_products')
+              field: product_sk
+
+      - name: customer_sk
+        description: Surrogate key for customer records.
+        tests:
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_sk
+
+      - name: credit_card_sk
+        description: Surrogate key for credit card records.
+
+      - name: ship_address_sk
+        description: Surrogate key for address records.
+        tests:
+          - relationships:
+              to: ref('dim_addresses')
+              field: address_sk
+
+      - name: status_sk
+        description: Surrogate key for order status.
+        tests:
+          - relationships:
+              to: ref('dim_status')
+              field: status_sk
+
+      - name: order_date_sk
+        description: Surrogate key for dates.
+
+      - name: sales_order_id
+        description: Natural primary key for sales orders.
+        tests:
+          - not_null
+
+      - name: sales_order_detail_id
+        description: One incremental unique number per product sold. Foreign key to sales orderd etails table.
+
+      - name: sales_reason_id
+        description: Foreign key to sales reasons table.
+
+      - name: credit_card_id
+        description: Credit card identification number. Foreign key to credit cards table.
+
+      - name: customer_id
+        description: Customer identification number. Foreign key to customers table.
+
+      - name: ship_to_address_id
+        description: Customer shipping address. Foreign key to addresses table.
+
+      - name: product_id
+        description: Product sold to customer. Foreign key to products table.
+
+      - name: status_id
+        description: Order current status.
+
+      - name: order_date
+        description: Date the sales order was created.
+
+      - name: order_month
+        description: Month the sales order was created.
+
+      - name: order_year
+        description: Year the sales order was created.
+
+      - name: order_status
+        description: Order current status.
+
+      - name: sales_reason
+        description: Sales reason description.
+
+      - name: order_quantity
+        description: Quantity ordered per product.
+
+      - name: unit_price
+        description: Selling price of a single product.
+
+      - name: unit_price_discount
+        description: Discount amount.
+
+      - name: order_subtotal
+        description: Sales subtotal.
+
+      - name: gross_sales
+        description: Gross sales represents the total revenue generated from sales by multiplying the unit price and order quantity.
+
+      - name: net_sales
+        description: Net sales is calculated by multiplying the unit price and order quantity and subtracting the discount amount.
