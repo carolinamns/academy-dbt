@@ -1,0 +1,129 @@
+version: 2
+
+sources:
+  - name: sap_adw
+    description: Raw tables from Adventure Works dataset.
+    schema: sap_adw
+    tables:
+      - name: address
+        description: Address data for customers, employees, and vendors.
+        columns:
+          - name: addressid
+            description: Primary key for address records. Auto-increment column.
+            tests:
+              - unique
+              - not_null
+
+      - name: countryregion
+        description: Lookup table containing ISO standard codes for countries and regions.
+        columns:
+          - name: countryregioncode
+            description: Primary key for country and region records. ISO standard code for countries and regions.
+            tests:
+              - unique
+              - not_null
+
+      - name: creditcard
+        description: Credit card data.
+        columns:
+          - name: creditcardid
+            description: Primary key for credit card records. Auto-increment column.
+            tests:
+              - unique
+              - not_null
+
+      - name: customer
+        description: Current customer data.
+        columns:
+          - name: customerid
+            description: Primary key for customer records. Auto-increment column.
+            tests:
+              - unique
+              - not_null
+
+      - name: person
+        description: Individuals involved with Adventure Works, including employees, customers and vendors.
+        columns:
+          - name: businessentityid
+            description: Primary key for person records.
+            tests:
+              - unique
+              - not_null
+
+      - name: product
+        description: Products sold or used in the manufacturing of sold products.
+        columns:
+          - name: productid
+            description: Primary key for product records. Auto-increment column.
+            tests:
+              - unique
+              - not_null
+
+      - name: productcategory
+        description: High-level product categories.
+        columns:
+          - name: productcategoryid
+            description: Primary key for product category records. Auto increment column.
+            tests:
+              - unique
+              - not_null
+
+      - name: productsubcategory
+        description: Subcategories of products.
+        columns:
+          - name: productcategoryid
+            description: Primary key for product subcategory records. Auto increment column.
+            tests:
+              - not_null
+
+      - name: salesorderdetail
+        description: Individual products associated with a specific sales order.
+        columns:
+          - name: salesorderdetailid
+            description: Primary key. One incremental unique number per product sold.
+            tests:
+              - not_null
+
+      - name: salesorderheader
+        description: General sales order data.
+        columns:
+          - name: salesorderid
+            description: Primary key. Auto-increment column.
+            tests:
+              - unique
+              - not_null
+
+      - name: salesorderheadersalesreason
+        description: Cross-reference table that maps sales orders to sales reasons.
+        columns:
+          - name: salesorderid
+            description: Primary key. Foreign key to salesorderheader table.
+            tests:
+              - not_null
+
+      - name: salesreason
+        description: Lookup table of reasons for customer purchases.
+        columns:
+          - name: salesreasonid
+            description: Primary key for sales reason records. Auto-increment column.
+            tests:
+              - unique
+              - not_null
+
+      - name: stateprovince
+        description: Lookup table for states and provinces.
+        columns:
+          - name: stateprovinceid
+            description: Primary key for state and province records. Auto-increment column.
+            tests:
+              - unique
+              - not_null
+
+      - name: store
+        description: Customer stores (resellers) of Adventure Works products.
+        columns:
+          - name: businessentityid
+            description: Primary key. Foreign key to customer table.
+            tests:
+              - unique
+              - not_null
