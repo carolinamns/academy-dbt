@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: Dimension table with current customer data.
+    columns:
+      - name: customer_sk
+        description: Surrogate key for customer records.
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        description: Natural primary key for customer records.
+        tests:
+          - unique
+          - not_null
+
+      - name: person_id
+        description: Foreign key to people table.
+
+      - name: store_id
+        description: Foreign key to stores table.
+
+      - name: person_type
+        description: Primary type of person.
+
+      - name: full_name
+        description: Full name of the person.
+
+      - name: store_name
+        description: Name of the store.

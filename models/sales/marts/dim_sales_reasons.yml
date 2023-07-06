@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: dim_sales_reasons
+    description: Dimension table with customer orders reasons.
+    columns:
+      - name: sales_reason_sk
+        description: Surrogate key for sales reasons.
+        tests:
+          - not_null
+
+      - name: sales_order_id
+        description: Natural primary key for sales reasons.
+        tests:
+          - not_null
+
+      - name: sales_reason_id
+        description: Foreign key to sales reasons table.
+        tests:
+          - not_null
+
+      - name: sales_reason
+        description: Sales reason description.
