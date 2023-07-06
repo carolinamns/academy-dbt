@@ -1,6 +1,9 @@
 /* Verify that gross sales from 2011 match the expected value.
-If the sum of revenue from sales from 2011 does not match the
-expected value, the test will fail. */
+If the sum of gross sales from 2011 does not match the
+expected value, the test will fail. . To account for potential
+floating-point precision differences, the test compares the
+absolute difference between the calculated gross sales and the
+expected value against a small threshold. */
 
 with gross_sales_2011 as (
 
