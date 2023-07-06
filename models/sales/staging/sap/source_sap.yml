@@ -42,7 +42,7 @@ sources:
               - not_null
 
       - name: person
-        description: Individuals involved with Adventure Works, including employees, customer contacts, and vendor contacts.
+        description: Individuals involved with Adventure Works, including employees, customers and vendors.
         columns:
           - name: businessentityid
             description: Primary key for person records.
