@@ -50,10 +50,7 @@ models:
           - not_null
 
       - name: sales_order_detail_id
-        description: One incremental unique number per product sold. Foreign key to sales orderd etails table.
-
-      - name: sales_reason_id
-        description: Foreign key to sales reasons table.
+        description: One incremental unique number per product sold. Foreign key to sales order details table.
 
       - name: credit_card_id
         description: Credit card identification number. Foreign key to credit cards table.
@@ -72,18 +69,6 @@ models:
 
       - name: order_date
         description: Date the sales order was created.
-
-      - name: order_month
-        description: Month the sales order was created.
-
-      - name: order_year
-        description: Year the sales order was created.
-
-      - name: order_status
-        description: Order current status.
-
-      - name: sales_reason
-        description: Sales reason description.
 
       - name: order_quantity
         description: Quantity ordered per product.
